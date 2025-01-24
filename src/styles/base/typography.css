@@ -1,0 +1,44 @@
+@import url('https://fonts.cdnfonts.com/css/metropolis-2');
+@import url('https://fonts.googleapis.com/css2?family=Rubik+One&display=swap');
+
+h1 {
+    font-size: var(--hero-heading-font-size);
+    font-family: var(--font-family-tertiary);
+    font-weight: var(--font-weight-normal);
+    background: var(--text-beige-linear);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}   
+
+h2 {
+    font-size: var(--hero-heading2-font-size);
+}  
+
+h3 {
+    font-size: var(--hero-heading3-font-size);
+}
+
+p {
+    font-size: var(--wp--preset--font-size--medium);
+}
+
+li {
+    font-size: var(--wp--preset--font-size--medium);
+    font-weight: var(--font-weight-normal);
+} 
+
+.section-title {
+    font-size: var(--hero-heading2-font-size);
+    margin-bottom: var(--wp--preset--spacing--40);
+    color: var(--text-beige-linear);
+    font-family: var(--font-family-tertiary);
+    font-weight: var(--font-weight-normal);
+    margin-bottom: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}

@@ -1,0 +1,20 @@
+header {
+    background-color: var(--header-bg);
+    padding: 15px 80px;
+    color: var(--text-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    height: var(--site-header-height);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px var(--shadow-dark);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+/* ... resten av header-relaterad styling från styles.css ... */ 

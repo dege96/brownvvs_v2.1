@@ -1,0 +1,228 @@
+.hero {
+    background: var(--bg-dark-blue);
+    background-image: url('./pipessvg1.png');
+    background-size: cover;
+    background-attachment: fixed;
+    color: var(--text-white);
+    text-align: left;
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    box-sizing: border-box;
+    margin-top: var(--site-header-height);
+}
+
+.hero-blur-vector {
+    position: absolute;
+    top: 0;
+    right: 38vw;
+    width: 100%;
+    height: 100%;
+    background-color: var(--hero-blur);
+    backdrop-filter: blur(5.1px);
+    z-index: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right center;
+    clip-path: polygon(0 0, 100% 0, 93% 100%, 0% 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 60%;
+    opacity: 0;
+    margin-top: 5vh;
+    transform: translateY(20px);
+    animation: fadeInUp 1s forwards 0.5s;
+    padding: 8vh 15vh 15vh 15vh;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero h1 {
+    font-family: var(--font-family-tertiary);
+    font-size: var(--hero-heading-font-size);
+    margin-bottom: var(--wp--preset--spacing--50);
+    line-height: 1.2;
+    font-weight: 300;
+    color: var(--text-beige-linear);
+}
+
+.hero ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.hero ul li {
+    margin: var(--wp--preset--spacing--30) 0;
+    display: flex;
+    align-items: center;
+    font-size: var(--wp--preset--font-size--medium);
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInLeft 0.5s forwards;
+    animation-delay: calc(0.7s + (var(--item-index) * 0.1s));
+}
+
+@keyframes fadeInLeft {
+    to {
+        opacity: 0.9;
+        transform: translateX(0);
+    }
+}
+
+.hero ul li::before {
+    content: '\2713';
+    color: rgb(29, 185, 84);
+    margin-right: 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    opacity: 0;
+    transform: scale(0);
+    animation: scaleIn 0.3s forwards;
+    animation-delay: calc(1s + (var(--item-index) * 0.1s));
+}
+
+@keyframes scaleIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.cta-container {
+    margin-top: 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: nowrap;
+}
+
+.cta-container a {
+    background-color: var(--primary-red);
+    color: var(--text-dark);
+    padding: 16px 32px;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    min-width: fit-content;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-container .secondary-cta {
+    background-color: transparent;
+    border: 2px solid var(--primary-red);
+    color: var(--text-beige);
+}
+
+.cta-container a:hover {
+    transform: scale(1.01);
+}
+
+.cta-container a::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    backdrop-filter: blur(0.2px);
+    height: 100%;
+    background: rgba(255, 255, 255, 0.016);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+
+.cta-container a:hover::after {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 1;
+}
+
+@media (max-width: 1020px) {
+    .hero {
+        padding: 31px 6vw 10vh;
+        height: auto;
+        min-height: fit-content;
+    }
+
+    .hero-content {
+        max-width: 90%;
+        padding: 2vw;
+    }
+
+    .hero-blur-vector {
+        right: 18vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-blur-vector {
+        right: 0;
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    .cta-container {
+        gap: 12px;
+    }
+
+    .cta-container a {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .cta-container {
+        gap: 8px;
+    }
+
+    .cta-container a {
+        padding: 10px 20px;
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    margin-top: 2rem;
+}
+
+.hero-button {
+    white-space: nowrap;
+    padding: 0.8rem 1.5rem;
+    min-width: fit-content;
+}
+
+@media (max-width: 768px) {
+    .hero-buttons {
+        gap: 0.8rem;
+    }
+
+    .hero-button {
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .hero-buttons {
+        gap: 0.5rem;
+    }
+} 

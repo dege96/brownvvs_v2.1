@@ -1,0 +1,272 @@
+header {
+    background-color: var(--header-bg);
+    padding-inline: 4vw;
+    color: var(--text-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    height: var(--site-header-height);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px var(--shadow-dark);
+    z-index: 1000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+header.scrolled {
+    background-color: var(--header-bg-scrolled);
+}
+
+header .logo {
+    font-size: 1.8rem;
+    font-weight: var(--font-weight-heavy);
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: calc(var(--site-header-height) - 30px);
+    width: auto;
+    object-fit: contain;
+}
+
+.logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--primary-red);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.logo:hover::after {
+    transform: translateX(0);
+}
+
+nav {
+    display: flex;
+    gap: 45px;
+    margin-right: 40px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+nav a {
+    color: var(--text-white);
+    text-decoration: none;
+    font-weight: var(--font-weight-normal);
+    font-size: 0.95rem;
+    opacity: 0.9;
+    position: relative;
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+nav a::after {
+    color: var(--text-dark);
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-red);
+    transition: width 0.3s ease;
+}
+
+nav a:not(.cta-button):hover::after {
+    width: 100%;
+}
+
+/* Aktiv länk styling */
+nav a.active {
+    color: var(--primary-red);
+}
+
+nav a.active::after {
+    width: 100%;
+    opacity: 0.5;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-white);
+    transition: transform 0.3s ease,
+                opacity 0.2s ease,
+                background-color 0.3s ease;
+    transform-origin: center;
+}
+
+.hamburger:hover span {
+    background-color: var(--primary-red);
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: translateY(9px) rotate(45deg) scale(0.9);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg) scale(0.9);
+}
+
+.nav-cta {
+    background-color: var(--primary-red);
+    color: var(--text-dark) !important;
+    padding: 12px 25px !important;
+    border-radius: 6px;
+    font-weight: var(--font-weight-medium) !important;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-cta:hover {
+    opacity: 0.8;
+    transform: scale(1.01);
+}
+
+/* Ta bort underline-effekten för CTA-knappen */
+.nav-cta::after {
+    display: none;
+}
+
+/* Ripple effekt för CTA knapp */
+.nav-cta::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.nav-cta:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Tablet breakpoint */
+@media (max-width: 1020px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    nav {
+        position: absolute;
+        top: var(--site-header-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--header-bg-scrolled);
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 20px var(--shadow-dark);
+    }
+
+    nav.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+        padding: 20px 0;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+        padding: 15px 0;
+        opacity: 0;
+        transform: translateY(-20px);
+        transition: all 0.3s ease-in-out;
+    }
+
+    nav.active a {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Fördröjningseffekter för länkar */
+    nav.active a:nth-child(1) { transition-delay: 0.1s; }
+    nav.active a:nth-child(2) { transition-delay: 0.2s; }
+    nav.active a:nth-child(3) { transition-delay: 0.3s; }
+    nav.active a:nth-child(4) { transition-delay: 0.4s; }
+    nav.active a:nth-child(5) { transition-delay: 0.5s; }
+}
+
+/* Mobil breakpoint */
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+
+    .logo {
+        font-size: 1.5rem;
+    }
+
+    nav {
+        top: 60px;
+        padding: 0;
+    }
+
+    nav a {
+        padding: 0.8rem 1.5rem;
+        margin: 0.2rem 0;
+    }
+
+    .nav-cta {
+        margin: 0.5rem 1.5rem;
+        padding: 0.8rem 1.5rem !important;
+        border-radius: 25px;
+    }
+
+    /* Hamburger-specifika justeringar för mobil */
+    .hamburger span {
+        margin: 2px 0;
+    }
+} 

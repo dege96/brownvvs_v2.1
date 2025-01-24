@@ -1,0 +1,34 @@
+:root {   
+
+    /* Primary Colors */
+    --primary-dark-blue: #281E15;
+    --secondary-dark-blue: #43362a;
+    --primary-green: #8B7355;
+    --primary-red: #F1E4CE;
+
+    /* Background Colors */
+    --bg-dark-blue_gradient1: linear-gradient(90deg, rgba(40, 30, 21, 0.81), rgba(40, 30, 21, 0.71));
+    --bg-dark-blue_gradient2: linear-gradient(to left, rgba(62, 53, 39, 0.238) 0%, transparent 100%);
+    --hero-blur: hsla(28, 42%, 9%, 0.47);
+
+    --bg-dark-blue: #281E15;
+    --bg-light: #332921;
+    --bg-light-blue: #DEB887;
+    --bg-light-green: #D2B48C;
+    --bg-light-beige: #f1ede5;
+    --bg-white-transparent: rgba(255, 255, 255, 0.136);
+    
+    /* Text Colors */
+    --text-white: #faf8f5;
+    --text-beige: #F1E4CE;
+    --text-beige-linear: linear-gradient(to right, #FFDAA6  , #FFEED6);
+    --text-white-transparent: rgba(255, 255, 255, 0.9);
+    --text-dark: #281E15;
+    --text-semi-dark: #494338;
+
+    /* UI Element Colors */
+    --header-bg: #281E15;
+    --header-bg-scrolled: rgba(40, 30, 21, 0.98);
+    --shadow-green: rgba(139, 115, 85, 0.3);
+    --shadow-dark: rgba(0, 0, 0, 0.1);
+} 

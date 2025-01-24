@@ -1,0 +1,6 @@
+.footer {
+    background-color: var(--bg-light);
+    padding: 5vh 0;
+}
+
+/* ... resten av footer-relaterad styling från styles.css ... */ 

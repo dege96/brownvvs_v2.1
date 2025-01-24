@@ -1,0 +1,14 @@
+/* Import base styles */
+@import './base/reset.css';
+@import './base/typography.css';
+
+/* Import design system */
+@import './designsystem.css';
+
+/* Import current theme */
+@import './themes/colors_brown.css';
+/* @import './themes/colors_blue.css'; -- För framtida bruk */
+
+/* Import layouts */
+@import './layout/header.css';
+@import './layout/footer.css'; 
