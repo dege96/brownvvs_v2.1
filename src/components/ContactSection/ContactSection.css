@@ -41,7 +41,8 @@
     border-radius: 12px;
 }
 
-.contact-info h1 {
+.contact-info h2 {
+    color: white;
     margin-bottom: var(--wp--preset--spacing--30);
 }
 
@@ -158,11 +159,6 @@
     .contact-section {
         padding: var(--wp--preset--spacing--40) 0;
     }
-
-    .contact-info {
-        padding: var(--wp--preset--spacing--30);
-    }
-
     .contact-section h2 {
         font-size: var(--hero-heading2-font-size);
     }
