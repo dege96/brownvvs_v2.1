@@ -43,6 +43,7 @@
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    cursor: pointer;
 }
 
 .course-card:hover {
@@ -131,14 +132,27 @@
 }
 
 @media (max-width: 768px) {
-
     .courses-grid {
         grid-template-columns: 1fr;
         gap: var(--wp--preset--spacing--30);
     }
 
     .course-card {
-        padding: var(--wp--preset--spacing--40);
+        padding: var(--wp--preset--spacing--60);
+    }
+
+    .course-card p {
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        margin: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .course-card p.expanded {
+        max-height: 200px;
+        opacity: 1;
+        margin-bottom: var(--wp--preset--spacing--40);
     }
 
     .target-audience {

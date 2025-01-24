@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaGraduationCap, FaChalkboardTeacher, FaUsers, FaCheckCircle } from 'react-icons/fa';
 import './CoursesSection.css';
 
 const CoursesSection = () => {
+    const [expandedCard, setExpandedCard] = useState(null);
+    
     const courses = [
         {
             icon: <FaUsers />,
@@ -37,6 +39,10 @@ const CoursesSection = () => {
         }
     ];
 
+    const toggleCard = (index) => {
+        setExpandedCard(expandedCard === index ? null : index);
+    };
+
     return (
         <section className="courses-section">
             <div className="courses-content">
@@ -48,12 +54,14 @@ const CoursesSection = () => {
 
                 <div className="courses-grid">
                     {courses.map((course, index) => (
-                        <div key={index} className="course-card">
+                        <div key={index} className="course-card" onClick={() => toggleCard(index)}>
                             <div className="course-icon">
                                 {course.icon}
                             </div>
                             <h3>{course.title}</h3>
-                            <p>{course.description}</p>
+                            <p className={expandedCard === index ? 'expanded' : ''}>
+                                {course.description}
+                            </p>
                             <div className="target-audience">
                                 <h4>Passar dig som:</h4>
                                 <ul>
@@ -67,10 +75,6 @@ const CoursesSection = () => {
                             </div>
                         </div>
                     ))}
-                </div>
-
-                <div className="courses-cta">
-                    <a href="#contact" className="cta-button">Boka utbildning</a>
                 </div>
             </div>
         </section>
