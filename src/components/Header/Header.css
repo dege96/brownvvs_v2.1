@@ -187,6 +187,7 @@ nav a.active::after {
 @media (max-width: 1020px) {
     header {
         padding: 15px 20px;
+        justify-content: center;
     }
 
     .hamburger {
