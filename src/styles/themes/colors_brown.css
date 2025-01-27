@@ -5,7 +5,7 @@
     --secondary-dark-blue: #43362a;
     --primary-green: #e6ccb3;
     --primary-red: #F1E4CE;
-    --primary-yellow: #FFD78A; 
+    --primary-yellow: #FFD78A;
     --primary-orange: #FFB73A;
 
     /* Background Colors */
@@ -23,7 +23,7 @@
     
     /* Text Colors */
     --text-white: #faf8f5;
-    --text-beige: #F1E4CE;
+    --text-beige: #f2e9da;
     --text-beige-linear: linear-gradient(
         90deg, 
         rgb(137, 77, 60) 0%, 

@@ -173,7 +173,6 @@
     border-radius: 8px;
     overflow: hidden;
     margin: 20px;
-    box-shadow: 0 4px 20px var(--shadow-dark);
 }
 
 .mobile-header {
@@ -181,6 +180,8 @@
     margin: 0;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
+    position: relative;
+    gap: 0;
 }
 
 .mobile-header-item {
@@ -189,7 +190,7 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
-    background-color: var(--secondary-dark-blue);
+    background-color: var(--bg-light);
     color: var(--text-dark);
     display: flex;
     flex-direction: column;
@@ -209,6 +210,12 @@
 
 .mobile-header-item.active {
     background-color: var(--bg-dark-blue);
+    color: var(--text-white);
+    border-radius: 20px 20px 0 0;
+    margin-top: -10px;
+    padding-top: 25px;
+    position: relative;
+    z-index: 2;
 }
 
 .mobile-header-item .title {
@@ -289,7 +296,6 @@
 }
 
 .mobile-content .logo-image {
-    filter: brightness(0) invert(1);
     display: block;
     margin: 0 auto;
     width: 150px;
@@ -319,6 +325,8 @@
 }
 
 @media (max-width: 1020px) {
+
+    
     .stats-section {
         background-color: var(--bg-light);
         padding: 0;
@@ -335,6 +343,7 @@
     .stats-text {
         text-align: center;
         max-width: 100%;
+        display: none;
     }
 
     .stats-text::after {

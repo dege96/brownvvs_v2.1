@@ -11,6 +11,32 @@ const StatsSection = () => {
 
     const handleCircleClick = (circleNumber) => {
         setActiveCircle(circleNumber);
+        
+        // Ta bort tooltip när man klickar på "Om företaget" (cirkel 1)
+        if (circleNumber === 1) {
+            tooltipRef.current?.classList.remove('visible');
+            if (animationTimeoutRef.current) {
+                clearTimeout(animationTimeoutRef.current);
+            }
+            setIsHovering(false);
+            
+            // Återställ alla färger
+            const elements = document.querySelectorAll('.cls-1, .cls-2');
+            elements.forEach(element => {
+                element.style.fill = '#f1f2f2';
+            });
+
+            const paths = ['path1', 'path2', 'path3'].map(id => document.getElementById(id));
+            const dots = ['dot1', 'dot2', 'dot3', 'dot4'].map(id => document.getElementById(id));
+
+            paths.forEach(path => {
+                if (path) path.style.fill = 'var(--bg-light-beige)';
+            });
+
+            dots.forEach(dot => {
+                if (dot) dot.style.fill = 'var(--bg-light-beige)';
+            });
+        }
     };
 
     const handleMobileTabClick = (contentType) => {
@@ -261,7 +287,7 @@ const StatsSection = () => {
     return (
         <section className="stats-section" id="om-oss">
             <div className="section-header">
-                <h1 className="section-title">Om företaget</h1>
+                <h1 className="section-title">Om oss</h1>
             </div>
             <div className="stats-text">
                 <h1>Brown VVS</h1>
