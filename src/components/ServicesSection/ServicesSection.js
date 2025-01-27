@@ -24,6 +24,10 @@ const ServicesSection = () => {
         {
             title: "Utredningar",
             description: "Vi erbjuder kvalificerade utredningar och systematisk felsökning av värme-, kyla- och VVC-system. Med vår expertis och moderna mätmetoder identifierar och åtgärdar vi effektivt komplexa driftproblem för att optimera systemens funktion och prestanda."
+        },
+        {
+            title: "Utbildningar",
+            description: "Vi erbjuder grundläggande, fördjupande och specialiserade kurser som ger dig kunskapen att förstå och optimera VVS-system. Våra utbildningar riktar sig till konsulter, fastighetsägare och andra intresserade."
         }
     ];
 
@@ -34,7 +38,7 @@ const ServicesSection = () => {
 
     return (
         <section className="services-section" id="services">
-            <h2 className="section-title section-title-lightblue">Våra Tjänster</h2>
+            <h1 className="section-title section-title-lightblue">Våra Tjänster</h1>
             <div className="services-grid">
                 {services.map((service, index) => (
                     <div 

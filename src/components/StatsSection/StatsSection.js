@@ -4,7 +4,10 @@ import './StatsSection.css';
 const StatsSection = () => {
     const [activeCircle, setActiveCircle] = useState(1);
     const [activeMobileTab, setActiveMobileTab] = useState('brown');
+    const [isHovering, setIsHovering] = useState(false);
+    const [lastHoveredDot, setLastHoveredDot] = useState('dot1');
     const tooltipRef = useRef(null);
+    const animationTimeoutRef = useRef(null);
 
     const handleCircleClick = (circleNumber) => {
         setActiveCircle(circleNumber);
@@ -14,99 +17,186 @@ const StatsSection = () => {
         setActiveMobileTab(contentType);
     };
 
+    const tooltips = {
+        'dot1': '1991 började jag min karriär som injusterare av rörsystem på Värmex Konsult AB',
+        'dot2': '1992-1993 vidareutbildade mig inom uppvärmningsteknik på STI parallellt med mitt arbete',
+        'dot3': 'Sedan dess har jag arbetat som konstruktör på flera ledande företag som Torsten Palmqvist AB, Grontmij och Energiverket',
+        'dot4': '2022 startade jag Brown VVS för att kunna erbjuda spetskompetens inom VVS-projektering och injustering'
+    };
+
+    const animateDot = (dotId, shouldShowTooltip = true) => {
+        if (isHovering) return;
+
+        // Kontrollera att alla nödvändiga element finns
+        const dot = document.getElementById(dotId);
+        const dot1 = document.getElementById('dot1');
+        const dot2 = document.getElementById('dot2');
+        const dot3 = document.getElementById('dot3');
+        const dot4 = document.getElementById('dot4');
+        const path1 = document.getElementById('path1');
+        const path2 = document.getElementById('path2');
+        const path3 = document.getElementById('path3');
+
+        // Om något av de kritiska elementen saknas, avbryt animationen
+        if (!dot || !dot1 || !dot2 || !dot3 || !dot4 || !path1 || !path2 || !path3) {
+            return;
+        }
+
+        // Återställ alla färger först
+        const elements = document.querySelectorAll('.cls-1, .cls-2');
+        elements.forEach(element => {
+            if (element) element.style.fill = '#f1f2f2';
+        });
+
+        const paths = [path1, path2, path3];
+        const dots = [dot1, dot2, dot3, dot4];
+
+        paths.forEach(path => {
+            if (path) path.style.fill = 'var(--bg-light-beige)';
+        });
+
+        dots.forEach(d => {
+            if (d) d.style.fill = 'var(--bg-light-beige)';
+        });
+
+        // Animera den aktuella doten
+        dot.style.fill = 'var(--primary-orange)';
+
+        // Hantera färgändringar för olika dots
+        if (dotId === 'dot2') {
+            path1.style.fill = 'var(--primary-orange)';
+            dot1.style.fill = 'var(--primary-orange)';
+        } else if (dotId === 'dot3') {
+            dot1.style.fill = 'var(--primary-orange)';
+            dot2.style.fill = 'var(--primary-orange)';
+            path1.style.fill = 'var(--primary-orange)';
+            path2.style.fill = 'var(--primary-orange)';
+        } else if (dotId === 'dot4') {
+            dot1.style.fill = 'var(--primary-orange)';
+            dot2.style.fill = 'var(--primary-orange)';
+            dot3.style.fill = 'var(--primary-orange)';
+            path1.style.fill = 'var(--primary-orange)';
+            path2.style.fill = 'var(--primary-orange)';
+            path3.style.fill = 'var(--primary-orange)';
+        }
+
+        // Uppdatera text färg
+        const texts = document.querySelectorAll('#Layer_1 text');
+        texts.forEach((text, index) => {
+            if (text && index === Object.keys(tooltips).indexOf(dotId)) {
+                text.style.transition = 'all 0.9s ease';
+                text.style.fill = 'var(--primary-orange)';
+            }
+        });
+
+        // Hantera tooltip
+        if (shouldShowTooltip && tooltipRef.current && dot) {
+            tooltipRef.current.textContent = tooltips[dotId];
+            const rect = dot.getBoundingClientRect();
+            const statsSection = document.querySelector('.stats-section');
+            const statsSectionRect = statsSection.getBoundingClientRect();
+            
+            tooltipRef.current.style.left = `${rect.left - statsSectionRect.left + (rect.width / 2)}px`;
+            tooltipRef.current.style.top = `${rect.top - statsSectionRect.top}px`;
+            tooltipRef.current.classList.add('visible');
+        }
+    };
+
+    const startAnimation = () => {
+        if (isHovering) return;
+
+        const dots = ['dot1', 'dot2', 'dot3', 'dot4'];
+        let currentIndex = dots.indexOf(lastHoveredDot);
+        if (currentIndex === -1) currentIndex = 0;
+
+        const animate = () => {
+            if (isHovering) return;
+
+            const currentDot = dots[currentIndex];
+            animateDot(currentDot, true);
+
+            animationTimeoutRef.current = setTimeout(() => {
+                if (!isHovering) {
+                    currentIndex = (currentIndex + 1) % dots.length;
+                    if (currentIndex === 0) {
+                        const elements = document.querySelectorAll('.cls-1, .cls-2');
+                        elements.forEach(element => {
+                            element.style.fill = '#f1f2f2';
+                        });
+                        tooltipRef.current?.classList.remove('visible');
+                        setTimeout(() => {
+                            if (!isHovering) animate();
+                        }, 6000);
+                    } else {
+                        animate();
+                    }
+                }
+            }, 6000);
+        };
+
+        animate();
+    };
+
+    const handleHover = (event, dotId) => {
+        if (animationTimeoutRef.current) {
+            clearTimeout(animationTimeoutRef.current);
+        }
+        setIsHovering(true);
+        setLastHoveredDot(dotId);
+        animateDot(dotId, true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+        
+        // Återställ alla färger
+        const elements = document.querySelectorAll('.cls-1, .cls-2');
+        elements.forEach(element => {
+            element.style.fill = '#f1f2f2';
+        });
+
+        const paths = ['path1', 'path2', 'path3'].map(id => document.getElementById(id));
+        const dots = ['dot1', 'dot2', 'dot3', 'dot4'].map(id => document.getElementById(id));
+
+        paths.forEach(path => {
+            if (path) path.style.fill = 'var(--bg-light-beige)';
+        });
+
+        dots.forEach(dot => {
+            if (dot) dot.style.fill = 'var(--bg-light-beige)';
+        });
+
+        // Ta bort tooltip med en fördröjning för att matcha animationen
+        setTimeout(() => {
+            tooltipRef.current?.classList.remove('visible');
+        }, 300);
+
+        // Starta om animationen efter en kort fördröjning
+        setTimeout(startAnimation, 1000);
+    };
+
     useEffect(() => {
+        // Hantera cirkel-klick
         const circles = document.querySelectorAll('.stat-circle');
         const statsText = document.querySelector('.stats-text p');
-        const statsTitle = document.querySelector('.stats-text h2');
-        const statsSubtitle = document.querySelector('.stats-text h3');
+        const statsTitle = document.querySelector('.stats-text h1');
 
-        const showTooltip = (text, target, duration = 3000) => {
-            if (tooltipRef.current) {
-                tooltipRef.current.textContent = text;
-                tooltipRef.current.style.left = `${target.getBoundingClientRect().left}px`;
-                tooltipRef.current.style.top = `${target.getBoundingClientRect().top - 40}px`;
-                tooltipRef.current.classList.add('visible');
-            }
-        };
-
-        const handleHover = (event, dotId, tooltips) => {
-            if (dotId === 'dot1') {
-                window.hasBeenHovered = true;
-            }
-            if (tooltipRef.current) {
-                tooltipRef.current.textContent = tooltips[dotId];
-                tooltipRef.current.style.left = `${event.clientX + 20}px`;
-                tooltipRef.current.style.top = `${event.clientY - 10}px`;
-                tooltipRef.current.classList.add('visible');
-            }
-            
+        // Lägg till hover-hantering för dots
+        const dots = ['dot1', 'dot2', 'dot3', 'dot4'];
+        dots.forEach(dotId => {
             const dot = document.getElementById(dotId);
-            const dot1 = document.getElementById('dot1');
-            const dot2 = document.getElementById('dot2');
-            const dot3 = document.getElementById('dot3');
-            const dot4 = document.getElementById('dot4');
-            const path1 = document.getElementById('path1');
-            const path2 = document.getElementById('path2');
-            const path3 = document.getElementById('path3');
-
-            // Ändra färg på dot vid hover
-            if (dot) dot.style.fill = 'var(--primary-green)';
-
-            // Hantera färgändringar för olika dots
-            if (dotId === 'dot2') {
-                path1.style.fill = 'var(--primary-green)';
-                dot1.style.fill = 'var(--primary-green)';
-            } else if (dotId === 'dot3') {
-                dot1.style.fill = 'var(--primary-green)';
-                dot2.style.fill = 'var(--primary-green)';
-                path1.style.fill = 'var(--primary-green)';
-                path2.style.fill = 'var(--primary-green)';
-            } else if (dotId === 'dot4') {
-                dot1.style.fill = 'var(--primary-green)';
-                dot2.style.fill = 'var(--primary-green)';
-                dot3.style.fill = 'var(--primary-green)';
-                path1.style.fill = 'var(--primary-green)';
-                path2.style.fill = 'var(--primary-green)';
-                path3.style.fill = 'var(--primary-green)';
+            if (dot) {
+                dot.addEventListener('mouseenter', (e) => handleHover(e, dotId));
+                dot.addEventListener('mouseleave', handleMouseOut);
             }
-
-            // Uppdatera text färg
-            const texts = document.querySelectorAll('#Layer_1 text');
-            texts.forEach((text, index) => {
-                if (index === Object.keys(tooltips).indexOf(dotId)) {
-                    text.style.transition = 'all 0.9s ease';
-                    text.style.fill = 'var(--primary-green)';
-                }
-            });
-        };
-
-        const handleMouseOut = () => {
-            tooltipRef.current.classList.remove('visible');
-            
-            // Återställ alla färger
-            const elements = document.querySelectorAll('.cls-1, .cls-2');
-            elements.forEach(element => {
-                element.style.fill = '#f1f2f2';
-            });
-
-            const paths = ['path1', 'path2', 'path3'].map(id => document.getElementById(id));
-            const dots = ['dot1', 'dot2', 'dot3', 'dot4'].map(id => document.getElementById(id));
-
-            paths.forEach(path => {
-                if (path) path.style.fill = 'var(--bg-light-beige)';
-            });
-
-            dots.forEach(dot => {
-                if (dot) dot.style.fill = 'var(--bg-light-beige)';
-            });
-        };
-
-        const handleMouseMove = (event) => {
-            if (tooltipRef.current && tooltipRef.current.classList.contains('visible')) {
-                tooltipRef.current.style.left = `${event.clientX + 20}px`;
-                tooltipRef.current.style.top = `${event.clientY - 10}px`;
+            // Lägg även till hover för texten
+            const textId = `text${dotId.slice(-1)}`;
+            const text = document.getElementById(textId);
+            if (text) {
+                text.addEventListener('mouseenter', (e) => handleHover(e, dotId));
+                text.addEventListener('mouseleave', handleMouseOut);
             }
-        };
+        });
 
         circles.forEach((circle, index) => {
             if (!circle.classList.contains('bottom')) {
@@ -117,54 +207,6 @@ const StatsSection = () => {
                     if (statsText && statsTitle) {
                         statsText.innerHTML = circle.dataset.text;
                         statsTitle.textContent = circle.dataset.title;
-                        if (statsSubtitle) {
-                            statsSubtitle.textContent = circle.dataset.subtitle;
-                        }
-
-                        if (circle.id === 'circle-2') {
-                            const tooltips = {
-                                'dot1': '1991 började jag min karriär som injusterare av rörsystem på Värmex Konsult AB',
-                                'dot2': '1992-1993 vidareutbildade mig inom uppvärmningsteknik på STI parallellt med mitt arbete',
-                                'dot3': 'Sedan dess har jag arbetat som konstruktör på flera ledande företag som Torsten Palmqvist AB, Grontmij och Energiverket',
-                                'dot4': '2022 startade jag Brown VVS för att kunna erbjuda spetskompetens inom VVS-projektering och injustering'
-                            };
-
-                            setTimeout(() => {
-                                Object.keys(tooltips).forEach(dotId => {
-                                    const dot = document.getElementById(dotId);
-                                    const textId = `text${dotId.slice(-1)}`;
-                                    const text = document.getElementById(textId);
-
-                                    if (dot) {
-                                        dot.addEventListener('mouseover', (e) => handleHover(e, dotId, tooltips));
-                                        dot.addEventListener('mousemove', handleMouseMove);
-                                        dot.addEventListener('mouseout', handleMouseOut);
-                                    }
-                                    if (text) {
-                                        text.addEventListener('mouseover', (e) => handleHover(e, dotId, tooltips));
-                                        text.addEventListener('mousemove', handleMouseMove);
-                                        text.addEventListener('mouseout', handleMouseOut);
-                                    }
-                                });
-
-                                // Starta pulsering för dot1
-                                const dot1 = document.getElementById('dot1');
-                                if (dot1 && !window.hasBeenHovered) {
-                                    const pulseAnimation = () => {
-                                        if (!window.hasBeenHovered) {
-                                            dot1.style.fill = 'var(--bg-light-beige)';
-                                            setTimeout(() => {
-                                                if (!window.hasBeenHovered) {
-                                                    dot1.style.fill = 'var(--primary-green)';
-                                                    setTimeout(pulseAnimation, 1000);
-                                                }
-                                            }, 1000);
-                                        }
-                                    };
-                                    pulseAnimation();
-                                }
-                            }, 100);
-                        }
                     }
 
                     // Hantera bottom circle content
@@ -182,18 +224,47 @@ const StatsSection = () => {
             }
         });
 
+        // Starta animationen om vi är på rätt sektion
+        const circle2 = document.getElementById('circle-2');
+        if (circle2 && activeCircle === 2) {
+            startAnimation();
+        }
+
         return () => {
-            // Cleanup event listeners här om det behövs
+            // Cleanup
+            if (animationTimeoutRef.current) {
+                clearTimeout(animationTimeoutRef.current);
+            }
+            // Ta bort event listeners
+            circles.forEach(circle => {
+                if (!circle.classList.contains('bottom')) {
+                    circle.removeEventListener('click', () => {});
+                }
+            });
+            // Ta bort hover event listeners
+            dots.forEach(dotId => {
+                const dot = document.getElementById(dotId);
+                if (dot) {
+                    dot.removeEventListener('mouseenter', (e) => handleHover(e, dotId));
+                    dot.removeEventListener('mouseleave', handleMouseOut);
+                }
+                const textId = `text${dotId.slice(-1)}`;
+                const text = document.getElementById(textId);
+                if (text) {
+                    text.removeEventListener('mouseenter', (e) => handleHover(e, dotId));
+                    text.removeEventListener('mouseleave', handleMouseOut);
+                }
+            });
         };
-    }, []);
+    }, [isHovering, lastHoveredDot, activeCircle]);
 
     return (
         <section className="stats-section" id="om-oss">
             <div className="section-header">
-                <h2 className="section-title">Om Oss</h2>
+                <h1 className="section-title">Om företaget</h1>
             </div>
             <div className="stats-text">
-                <h2>Brown VVS</h2>
+                <h1>Brown VVS</h1>
                 <p>Med rötterna i VVS-branschen sedan 1991 har Brown VVS vuxit till en pålitlig partner för fastighetsägare, byggföretag och andra aktörer i Stockholm. Vi kombinerar gedigen erfarenhet med en passion för hållbara och effektiva lösningar.</p>
             </div>
             <div className="mobile-stats">
@@ -219,11 +290,11 @@ const StatsSection = () => {
                 <div className={`mobile-content ${activeMobileTab === 'brown' ? 'active' : ''}`} data-content="brown">
                     <h2>Brown VVS</h2>
                     <p>Med rötterna i VVS-branschen sedan 1991 har Brown VVS vuxit till en pålitlig partner för fastighetsägare, byggföretag och andra aktörer i Stockholm. Vi kombinerar gedigen erfarenhet med en passion för hållbara och effektiva lösningar.</p>
-                    <img src="/images/LogoBW.png" alt="Brown VVS Logo" className="logo-image" />
+                    <img src="/images/logo.png" alt="Brown VVS Logo" className="logo-image" />
                 </div>
                 
                 <div className={`mobile-content ${activeMobileTab === 'ulrika' ? 'active' : ''}`} data-content="ulrika">
-                    <h2>Min resa</h2>
+                    <h1>Min resa</h1>
                     <ul>
                         <li>Började min karriär 1991 som injusterare av rörsystem på Värmex Konsult AB</li>
                         <li>Vidareutbildade mig inom uppvärmningsteknik på STI 1992-1993 parallellt med mitt arbete</li>
@@ -242,7 +313,7 @@ const StatsSection = () => {
                     data-text="Med rötterna i VVS-branschen sedan 1991 har Brown VVS vuxit till en pålitlig partner för fastighetsägare, byggföretag och andra aktörer i Stockholm. Vi kombinerar gedigen erfarenhet med en passion för hållbara och effektiva lösningar."
                     data-title="Brown VVS"
                 >
-                    <div className="stat-number">Om Oss</div>
+                    <div className="stat-number">Om företaget</div>
                     <div className="stat-label">Brown VVS</div>
                 </div>
                 <div 
@@ -292,7 +363,7 @@ const StatsSection = () => {
                 </div>
                 <div className="stat-circle bottom">
                     <div className={`content ${activeCircle === 1 ? 'active' : ''}`} data-for="circle-1">
-                        <img src="/images/LogoBW.png" className="logo-image" alt="Company logo" />
+                        <img src="/images/logo.png" className="logo-image" alt="Company logo" />
                     </div>
                     <div className={`content ${activeCircle === 2 ? 'active' : ''}`} data-for="circle-2">
                         <img src="/images/MomentsByJenny_13.jpg" alt="Ulrika Brown" />

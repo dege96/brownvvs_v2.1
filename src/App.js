@@ -5,10 +5,6 @@ import './App.css';
 import './styles/themes.css';
 import Home from './pages/Home';
 import TjansterPage from './pages/TjansterPage';
-import CoursesPage from './pages/CoursesPage';
-
-const HomeLazy = React.lazy(() => import('./pages/Home'));
-const TjansterPageLazy = React.lazy(() => import('./pages/TjansterPage'));
 
 function App() {
   return (
@@ -18,7 +14,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/tjanster" element={<TjansterPage />} />
-          <Route path="/kurser" element={<CoursesPage />} />
         </Routes>
       </Suspense>
     </Router>

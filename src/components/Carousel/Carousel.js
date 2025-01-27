@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import './Carousel.css';
 
 const Carousel = ({ children }) => {
@@ -8,9 +8,9 @@ const Carousel = ({ children }) => {
 
     const items = React.Children.toArray(children);
 
-    const handleNext = () => {
+    const handleNext = useCallback(() => {
         setCurrentIndex(prev => (prev + 1) % items.length);
-    };
+    }, [items.length]);
 
     const handlePrev = () => {
         setCurrentIndex(prev => (prev - 1 + items.length) % items.length);
@@ -37,7 +37,7 @@ const Carousel = ({ children }) => {
     useEffect(() => {
         const timer = setInterval(handleNext, 5000);
         return () => clearInterval(timer);
-    }, []);
+    }, [handleNext]);
 
     return (
         <div className="carousel-container">

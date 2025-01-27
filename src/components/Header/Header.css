@@ -33,7 +33,7 @@ header .logo {
 }
 
 header .logo img {
-    height: calc(var(--site-header-height) - 30px);
+    height: calc(var(--site-header-height));
     width: auto;
     object-fit: contain;
 }

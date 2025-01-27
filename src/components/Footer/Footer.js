@@ -10,8 +10,8 @@ const Footer = () => {
         },
         {
             title: "Telefon",
-            content: "070 825 25 93",
-            link: "tel:0708252593"
+            content: "070-899 57 83",
+            link: "tel:0708995783"
         },
         {
             title: "E-post",

@@ -20,7 +20,7 @@ const TestimonialsSection = () => {
 
     return (
         <section className="testimonials-section" id="testimonials">
-            <h2 className="section-title">Vad våra kunder säger</h2>
+            <h1 className="section-title">Vad våra kunder säger</h1>
             <div className="testimonials-container">
                 <Carousel>
                     {testimonials.map((testimonial, index) => (

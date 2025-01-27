@@ -3,8 +3,10 @@
     /* Primary Colors */
     --primary-dark-blue: #281E15;
     --secondary-dark-blue: #43362a;
-    --primary-green: #8B7355;
+    --primary-green: #e6ccb3;
     --primary-red: #F1E4CE;
+    --primary-yellow: #FFD78A; 
+    --primary-orange: #FFB73A;
 
     /* Background Colors */
     --bg-dark-blue_gradient1: linear-gradient(90deg, rgba(40, 30, 21, 0.81), rgba(40, 30, 21, 0.71));
@@ -15,13 +17,24 @@
     --bg-light: #332921;
     --bg-light-blue: #DEB887;
     --bg-light-green: #D2B48C;
+
     --bg-light-beige: #f1ede5;
     --bg-white-transparent: rgba(255, 255, 255, 0.136);
     
     /* Text Colors */
     --text-white: #faf8f5;
     --text-beige: #F1E4CE;
-    --text-beige-linear: linear-gradient(to right, #FFDAA6  , #FFEED6);
+    --text-beige-linear: linear-gradient(
+        90deg, 
+        rgb(137, 77, 60) 0%, 
+        rgb(164, 103, 76) 20%, 
+        rgb(201, 140, 100) 40%, 
+        rgb(186, 111, 70) 60%, 
+        rgb(158, 85, 53) 80%, 
+        rgb(97, 29, 15) 100%
+      );
+
+    --text-beige-linear2: linear-gradient(90deg, rgb(137, 77, 60) 0%, rgb(164, 103, 76) 29%, rgb(186, 111, 70) 61%, rgb(158, 85, 53) 92%, rgb(97, 29, 15) 100%);
     --text-white-transparent: rgba(255, 255, 255, 0.9);
     --text-dark: #281E15;
     --text-semi-dark: #494338;

@@ -77,7 +77,7 @@ const Header = () => {
     return (
         <header className={`${isScrolled ? 'scrolled' : ''} ${isMenuOpen ? 'menu-open' : ''}`}>
             <a href="/" className="logo" onClick={handleLogoClick}>
-                <img src='/images/LogoText2.png' alt="BROWN VVS" />
+                <img src='/images/logo_text_white.jpg' alt="BROWN VVS" />
             </a>
             <div 
                 ref={hamburgerRef}
@@ -108,13 +108,6 @@ const Header = () => {
                     onClick={closeMenu}
                 >
                     Tjänster
-                </Link>
-                <Link 
-                    to="/kurser" 
-                    className={location.pathname === '/kurser' ? 'active' : ''}
-                    onClick={closeMenu}
-                >
-                    Kurser
                 </Link>
                 <ScrollLink to="contact" className="nav-cta" onClick={closeMenu}>
                     Kontakta oss

@@ -17,23 +17,27 @@ const ContactSection = () => {
                         <div className="contact-item">
                             <IoLocationOutline className="contact-icon" />
                             <div className="contact-text">
-                                <p>Pilkgatan 15</p>
-                                <p>133 43 Saltsjöbaden</p>
-                                <p>Stockholm</p>
+                                <a href="https://maps.app.goo.gl/SzoMteSxio2Khg1V7" target="_blank" rel="noopener noreferrer">
+                                    <p>Pilkgatan 15</p>
+                                    <p>133 43 Saltsjöbaden</p>
+                                    <p>Stockholm</p>
+                                </a>
                             </div>
                         </div>
 
                         <div className="contact-item">
                             <BsTelephone className="contact-icon" />
                             <div className="contact-text">
-                                <p>070 825 25 93</p>
+                                <p>070-899 57 83</p>
                             </div>
                         </div>
 
                         <div className="contact-item">
                             <HiOutlineMail className="contact-icon" />
                             <div className="contact-text">
-                                <p>Ulrika@brownvvs.se</p>
+                                <a href="mailto:Ulrika@brownvvs.se">
+                                    <p>Ulrika@brownvvs.se</p>
+                                </a>
                             </div>
                         </div>
 
