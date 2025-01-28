@@ -59,6 +59,10 @@
     position: relative;
 }
 
+.contact-item a {
+    text-decoration: none;
+}
+
 .contact-icon {
     font-size: 1.4rem;
     color: var(--text-beige);

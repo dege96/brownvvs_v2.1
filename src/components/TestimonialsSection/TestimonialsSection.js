@@ -20,8 +20,9 @@ const TestimonialsSection = () => {
 
     return (
         <section className="testimonials-section" id="testimonials">
-            <h1 className="section-title">Vad våra kunder säger</h1>
+            <div className="testimonials-box">
             <div className="testimonials-container">
+            <h1 className="section-title">Vad våra kunder säger</h1>
                 <Carousel>
                     {testimonials.map((testimonial, index) => (
                         <div key={index} className="testimonial-card">
@@ -43,6 +44,7 @@ const TestimonialsSection = () => {
                         </div>
                     ))}
                 </Carousel>
+            </div>
             </div>
         </section>
     );

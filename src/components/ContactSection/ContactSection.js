@@ -35,8 +35,8 @@ const ContactSection = () => {
                         <div className="contact-item">
                             <HiOutlineMail className="contact-icon" />
                             <div className="contact-text">
-                                <a href="mailto:Ulrika@brownvvs.se">
-                                    <p>Ulrika@brownvvs.se</p>
+                                <a href="mailto:ulrika@brownvvs.se">
+                                    <p>ulrika@brownvvs.se</p>
                                 </a>
                             </div>
                         </div>

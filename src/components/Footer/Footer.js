@@ -15,8 +15,8 @@ const Footer = () => {
         },
         {
             title: "E-post",
-            content: "Ulrika@brownvvs.se",
-            link: "mailto:Ulrika@brownvvs.se"
+            content: "ulrika@brownvvs.se",
+            link: "mailto:ulrika@brownvvs.se"
         }
     ];
 

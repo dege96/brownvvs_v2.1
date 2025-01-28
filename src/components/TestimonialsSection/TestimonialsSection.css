@@ -5,7 +5,14 @@
     background-color: var(--bg-dark);
 }
 
+.testimonials-box {
+    background-color: var(--bg-lighter);
+    border-radius: 10px;
+    padding: 40px;
+}
+
 .testimonials-container {
+
     max-width: 800px;
     margin: 0 auto;
 }
