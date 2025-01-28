@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
-import StatsSection from '../components/StatsSection/StatsSection';
+import AboutSection from '../components/AboutSection/AboutSection';
 import TestimonialsSection from '../components/TestimonialsSection/TestimonialsSection';
 import ContactSection from '../components/ContactSection/ContactSection';
 import Footer from '../components/Footer/Footer';
@@ -33,7 +33,7 @@ function Home() {
             </section>
 
             <section id="about">
-                <StatsSection />
+                <AboutSection />
             </section>
 
             <section id="testimonials">

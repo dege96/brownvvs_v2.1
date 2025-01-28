@@ -1,5 +1,5 @@
 .stats-section {
-    background-color: var(--bg-light);
+    background: linear-gradient(to bottom, var(--bg-light), var(--bg-dark-blue));
     display: flex;
     justify-content: space-around;
     gap: 60px;

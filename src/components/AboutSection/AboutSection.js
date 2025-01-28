@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './StatsSection.css';
+import './AboutSection.css';
 
 const StatsSection = () => {
     const [activeCircle, setActiveCircle] = useState(1);
@@ -328,7 +328,7 @@ const StatsSection = () => {
                         <li>Startade 2022 Brown VVS för att kunna erbjuda spetskompetens inom VVS-projektering och injustering</li>
                     </ul>
                     <div className="bottom-image">
-                        <img src="/images/MomentsByJenny_13.jpg" alt="Ulrika Brown" />
+                        <img src="/images/MomentsByJenny_13_compressed.jpg" alt="Ulrika Brown" />
                     </div>
                 </div>
             </div>
@@ -392,7 +392,7 @@ const StatsSection = () => {
                         <img src="/images/logo.png" className="logo-image" alt="Company logo" />
                     </div>
                     <div className={`content ${activeCircle === 2 ? 'active' : ''}`} data-for="circle-2">
-                        <img src="/images/MomentsByJenny_13.jpg" alt="Ulrika Brown" />
+                        <img src="/images/MomentsByJenny_13_compressed-min.jpg" alt="Ulrika Brown" />
                     </div>
                 </div>
             </div>
